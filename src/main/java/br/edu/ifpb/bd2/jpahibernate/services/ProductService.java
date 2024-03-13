@@ -26,7 +26,7 @@ public class ProductService {
         repository.saveAndFlush(product);
 
         ProductDTO response =  new ProductDTO(product.getId(), product.getName(),
-                product.getQuantity(), product.getPrice(), product.getDescription(), product.isAvailable());
+                product.getQuantity(), product.getPrice(), product.getDescription(), product.getCategory() , product.isAvailable());
 
         return Optional.of(response);
     }

@@ -1,6 +1,7 @@
 package br.edu.ifpb.bd2.jpahibernate.entities;
 
 import br.edu.ifpb.bd2.jpahibernate.dtos.ProductDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,13 +24,17 @@ public class Product {
     private Integer quantity;
     private Double price;
     private String description;
-    private Category category;
     private boolean available;
+
+    @JsonIgnore
+    @ManyToOne
+    private Category category;
 
     public Product(ProductDTO productDTO) {
         this.name = productDTO.name();
         this.quantity = productDTO.quantity();
         this.price = productDTO.price();
+        this.category = productDTO.category();
         this.available = productDTO.available();
     }
 

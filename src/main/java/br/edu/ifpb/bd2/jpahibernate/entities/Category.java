@@ -1,5 +1,6 @@
 package br.edu.ifpb.bd2.jpahibernate.entities;
 
+import br.edu.ifpb.bd2.jpahibernate.dtos.CategoryDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //private Set<Product> products = new HashSet<>();
+    private String name;
 
+    public Category(CategoryDTO categoryDTO) {
+        this.name = categoryDTO.name();
+    }
 }
