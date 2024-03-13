@@ -14,6 +14,13 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
+    /** CRUD x Http Request (Insomnia ou Postman)
+     * CREATE = POST
+     * READ = GET
+     * UPDATE = PUT
+     * DELETE = DELETE
+     */
+
     public Optional<ProductDTO> create(ProductDTO request) {
         var product = new Product(request);
         repository.saveAndFlush(product);

@@ -23,6 +23,7 @@ public class Product {
     private Integer quantity;
     private Double price;
     private String description;
+    private Category category;
     private boolean available;
 
     public Product(ProductDTO productDTO) {
