@@ -14,8 +14,8 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    public Optional<ProductDTO> create(ProductDTO productDTO) {
-        var product = new Product(productDTO);
+    public Optional<ProductDTO> create(ProductDTO request) {
+        var product = new Product(request);
         repository.saveAndFlush(product);
 
         ProductDTO response =  new ProductDTO(product.getId(), product.getName(),
