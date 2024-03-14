@@ -31,9 +31,8 @@ public class CategoryService {
         List<Category> categories = repository.findAll();
         List<CategoryDTO> responses = new ArrayList<>();
 
-        // Essa parte aqui, ainda tenho que entender melhor
+        // Isso equivale a um ForEach "normal"
         categories.forEach(category -> {
-//            ProductDTO response = mapper.map(product, ProductDTO.class);
             CategoryDTO response = new CategoryDTO(category);
             responses.add(response);
         });

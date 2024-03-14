@@ -5,11 +5,9 @@ import br.edu.ifpb.bd2.jpahibernate.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,6 +16,13 @@ public class ProductController {
 
     @Autowired
     private ProductService service;
+
+    /** CRUD x Http Request (Insomnia ou Postman)
+     * CREATE = POST
+     * READ = GET
+     * UPDATE = PUT
+     * DELETE = DELETE
+     */
 
     @PostMapping
     public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO) {
@@ -28,4 +33,19 @@ public class ProductController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping
+    public ResponseEntity<List<ProductDTO>> findAll() {
+        return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
+        Optional<ProductDTO> response = service.findById(id);
+
+        return response.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+
 }
