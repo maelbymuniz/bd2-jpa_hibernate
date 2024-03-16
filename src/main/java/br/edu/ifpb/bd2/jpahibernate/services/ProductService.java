@@ -46,4 +46,48 @@ public class ProductService {
         return Optional.of(productDTO);
     }
 
+    public Optional<ProductDTO> update(Long id, ProductDTO request) {
+        Optional<Product> product = repository.findById(id);
+
+        if (product.isPresent()) {
+            product.get().setName(request.name());
+            product.get().setQuantity(request.quantity());
+            product.get().setPrice(request.price());
+            product.get().setDescription(request.description());
+            product.get().setCategory(request.category());
+            repository.saveAndFlush(product.get());
+
+            ProductDTO productDTO = new ProductDTO(product.get());
+
+            return Optional.of(productDTO);
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Fazer 2 Deletes:
+     * 1 - 'Hard' que remove a informação do BD
+     * 2 - 'Lógico' que apenas desativa o objeto (caso na nossa aplicação necessitemos criar um histórico)
+     */
+    public boolean delete(Long id) {
+        Optional<Product> product = repository.findById(id);
+
+        if (product.isPresent()) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+
+    }
+    public boolean disable(Long id) {
+        Optional<Product> product = repository.findById(id);
+
+        if (product.isPresent()) {
+            product.get().setAvailable(false);
+            repository.save(product.get());
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,6 +29,9 @@ public class Category {
     private Long id;
 
     private String name;
+
+    @OneToMany
+    private List<Product> products;
 
     public Category(CategoryDTO categoryDTO) {
         this.name = categoryDTO.name();

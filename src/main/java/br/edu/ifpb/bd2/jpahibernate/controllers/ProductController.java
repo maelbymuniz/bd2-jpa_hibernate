@@ -47,5 +47,38 @@ public class ProductController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable("id") Long id,
+                                             @RequestBody ProductDTO resquest) {
+        Optional<ProductDTO> response = service.update(id, resquest);
+
+        if (response.isPresent()) {
+            return ResponseEntity.ok(response.get());
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        boolean deleted = service.delete(id);
+
+        return deleted
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> disable(@PathVariable("id") Long id) {
+        boolean inactive = service.disable(id);
+
+        // Usando Operador ternário pra simplificar o IF
+        return inactive
+                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
 
 }
