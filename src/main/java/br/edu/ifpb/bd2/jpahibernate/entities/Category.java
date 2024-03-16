@@ -1,6 +1,7 @@
 package br.edu.ifpb.bd2.jpahibernate.entities;
 
 import br.edu.ifpb.bd2.jpahibernate.dtos.CategoryDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "category")
     private List<Product> products;
 
     public Category(CategoryDTO categoryDTO) {

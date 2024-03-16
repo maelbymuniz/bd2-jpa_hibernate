@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "tb_products")
 @Data
@@ -26,8 +28,8 @@ public class Product {
     private String description;
     private boolean available;
 
-    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Product(ProductDTO productDTO) {
