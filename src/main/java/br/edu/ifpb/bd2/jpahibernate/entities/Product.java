@@ -28,7 +28,7 @@ public class Product {
     private String description;
     private boolean available;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,7 +32,6 @@ public class Category {
 
     private String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
