@@ -84,7 +84,7 @@ public class ProductService {
 
         if (product.isPresent()) {
             product.get().setAvailable(false);
-            repository.save(product.get());
+            repository.saveAndFlush(product.get());
             return true;
         }
         return false;

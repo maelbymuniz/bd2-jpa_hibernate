@@ -45,4 +45,25 @@ public class CategoryController {
         return response.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable("id") Long id,
+                                             @RequestBody CategoryDTO resquest) {
+        Optional<CategoryDTO> response = service.update(id, resquest);
+
+        if (response.isPresent()) {
+            return ResponseEntity.ok(response.get());
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        boolean deleted = service.delete(id);
+
+        return deleted
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

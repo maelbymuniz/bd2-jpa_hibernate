@@ -28,6 +28,7 @@ public class Product {
     private String description;
     private boolean available;
 
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
@@ -36,6 +37,7 @@ public class Product {
         this.name = productDTO.name();
         this.quantity = productDTO.quantity();
         this.price = productDTO.price();
+        this.description = productDTO.description();
         this.category = productDTO.category();
         this.available = productDTO.available();
     }

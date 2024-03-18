@@ -66,7 +66,6 @@ public class ProductController {
         return deleted
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
     }
 
     @DeleteMapping("/{id}")

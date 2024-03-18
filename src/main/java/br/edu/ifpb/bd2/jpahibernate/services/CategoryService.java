@@ -45,4 +45,27 @@ public class CategoryService {
         CategoryDTO categoryDTO = new CategoryDTO(category.get());
         return Optional.of(categoryDTO);
     }
+
+    public Optional<CategoryDTO> update(Long id, CategoryDTO request) {
+        Optional<Category> category = repository.findById(id);
+
+        if (category.isPresent()) {
+            category.get().setName(request.name());
+            repository.saveAndFlush(category.get());
+            CategoryDTO CategoryDTO = new CategoryDTO(category.get());
+            return Optional.of(CategoryDTO);
+        }
+        return Optional.empty();
+    }
+
+    public boolean delete(Long id) {
+        Optional<Category> category = repository.findById(id);
+
+        if (category.isPresent()) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+
+    }
 }
